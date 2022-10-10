@@ -99,14 +99,34 @@ void findPerfectsSmarter(long stop) {
 
 /* This function calculates the Nth perfect number based on the Euclid–Euler theorem.
  */
+//long findNthPerfectEuclid(long n) {
+//    long num = 0;
+//    long m, k;
+//    for (k = 1; k > 0; k++) {
+//        m = pow(2,k) - 1;
+//        if (smarterSum(m) == 1) num += 1;
+//        if (num == n) break;
+//    }
+//    return pow(2,k-1) * (pow(2,k)-1);
+//}
+
+// This function is intended to determine whether it is a prime
+bool isPrime(long m) {
+    return (smarterSum(m) == 1);
+}
+
+// the above implementation is not good because k value will overflow
+// so here we refine it by using while loop
 long findNthPerfectEuclid(long n) {
     long num = 0;
-    long m, k;
-    for (k = 1; k > 0; k++) {
-        m = pow(2,k) - 1;
-        if (smarterSum(m) == 1) num += 1;
+    long k = 1;
+    while (true) {
+        long m = pow(2,k) - 1;
+        if (isPrime(m)) num += 1; // define a bool function, see above
         if (num == n) break;
+        k++;
     }
+
     return pow(2,k-1) * (pow(2,k)-1);
 }
 
@@ -184,7 +204,7 @@ STUDENT_TEST("Confirm 33550336 is perfect") {
 
 STUDENT_TEST("Confirm findNthPerfectEuclid") {
     EXPECT_EQUAL(findNthPerfectEuclid(2),28);
-    EXPECT(isPerfect(findNthPerfectEuclid(3)));
+    EXPECT(isPerfect(findNthPerfectEuclid(3))); // we should use EXPECT_EQUAL, which is more accurate
     EXPECT_EQUAL(findNthPerfectEuclid(4),8128);
     EXPECT(isPerfect(findNthPerfectEuclid(5)));
 }

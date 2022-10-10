@@ -56,8 +56,8 @@ string encodeLetters(string s) {
 /* This function is intended to merge the adjacent numbers with the same values.
  */
 string mergeNumbers(string s) {
-    string result = charToString(s[0]);
-    for (int i = 1; i < s.length(); i++) {
+    string result;
+    for (int i = 0; i < s.length(); i++) {
         if (s[i] != result.back()) {
             result += s[i];
         }
@@ -129,7 +129,7 @@ void soundexSearch(string filepath) {
 
     // The names in the database are now stored in the provided
     // vector named databaseNames
-    for (int i = 0; i >= 0; i++) {
+    while (true) {
         string surname = getLine("Enter a surname (RETURN to quit): ");
         if (surname.empty()) break;
         string surnameEncoding = soundex(surname);
@@ -156,7 +156,6 @@ void soundexSearch(string filepath) {
         cout << endl;
     }
     cout << "All done!" << endl;
-
 }
 
 
