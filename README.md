@@ -1,2 +1,2 @@
 # CS106B
-Homework solution for CS106B
+Learning CS106B
